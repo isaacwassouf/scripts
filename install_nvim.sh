@@ -6,7 +6,7 @@ RELEASE=""
 
 # Usage function
 usage() {
-    echo "Usage: $0 [-r RELEASE]"
+    echo "Usage: $0 -r RELEASE"
     echo "  -r RELEASE    Specify the Neovim release to install"
     echo "  --help        Show this help message"
     exit 1
