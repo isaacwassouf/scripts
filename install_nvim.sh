@@ -6,7 +6,7 @@ RELEASE=""
 
 # Usage function
 usage() {
-    echo "Usage: $0 -r RELEASE"
+    echo "Usage: $0 [-r RELEASE]"
     echo "  -r RELEASE    Specify the Neovim release to install"
     echo "  --help        Show this help message"
     exit 1
@@ -35,8 +35,13 @@ done
 
 # Validate arguments
 if [[ -z "$RELEASE" ]]; then
-    echo "Error: Release (-r) is required"
-    usage
+    RELEASE="stable"
+    echo "Release was not specified, defaulting to stable"
+else
+    # add v prefix if not present
+    if [[ "$RELEASE" != v* ]]; then
+        RELEASE="v$RELEASE"
+    fi
 fi
 
 ensure_deps_installed() {
@@ -53,7 +58,7 @@ ensure_deps_installed() {
 install_nvim() {
     # Download the tarball
     echo "📥 Downloading Neovim release $RELEASE..."
-    wget -P /tmp "https://github.com/neovim/neovim/releases/download/v$RELEASE/nvim-linux-x86_64.tar.gz"
+    wget -P /tmp "https://github.com/neovim/neovim/releases/download/$RELEASE/nvim-linux-x86_64.tar.gz"
 
     # Unpack the tarball
     echo "📦 Unpacking Neovim release $RELEASE..."
