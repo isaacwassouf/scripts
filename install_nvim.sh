@@ -28,7 +28,7 @@ while [[ $# -gt 0 ]]; do
             ;;
         -c|--config)
             if [[ -z "$2" || "$2" == -* ]]; then
-                echo "Error: -c requires a config file argument"
+                echo "Error: -c requires a config name argument"
                 usage
             fi
             CONFIG="$2"
