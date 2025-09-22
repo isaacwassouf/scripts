@@ -9,8 +9,9 @@ CONFIG=""
 
 # Usage function
 usage() {
-    echo "Usage: $0 [-r RELEASE]"
+    echo "Usage: $0 [-r|--release RELEASE] [-c|--config CONFIG]"
     echo "  -r RELEASE    Specify the Neovim release to install"
+    echo "  -c CONFIG     Specify the config name to install"
     echo "  --help        Show this help message"
     exit 1
 }
@@ -57,12 +58,12 @@ fi
 
 install_config() {
     # check if the config exists in the configs.json
-    if jq '.configs | has("'$CONFIG'")' $SCRIPT_DIR/configs.json | grep -q "false"; then
+    if jq --arg config "$CONFIG" '.configs | has($config)' $SCRIPT_DIR/configs.json | grep -q "false"; then
         echo "Config $CONFIG does not exist in configs.json"
         exit 1
     fi
 
-    CONFIG_REPO=$(jq '.configs."'$CONFIG'"' $SCRIPT_DIR/configs.json | tr -d '"')
+    CONFIG_REPO=$(jq --arg config $CONFIG -r '.configs[$config]' $SCRIPT_DIR/configs.json)
 
     # create the config directory
     mkdir -p $HOME/.config
