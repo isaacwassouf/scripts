@@ -58,7 +58,7 @@ fi
 install_config() {
     # check if the config exists in the configs.json
     if jq '.configs | has("'$CONFIG'")' $SCRIPT_DIR/configs.json | grep -q "false"; then
-        echo "Config $CONFIG does not exists in configs.json"
+        echo "Config $CONFIG does not exist in configs.json"
         exit 1
     fi
 
