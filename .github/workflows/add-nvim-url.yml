@@ -1,6 +1,7 @@
 name: Add nvim config
 
 on:
+  pull_request:
   workflow_dispatch:
     inputs:
       owner:
