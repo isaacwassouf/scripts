@@ -1,0 +1,23 @@
+name: Add nvim config
+
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      owner:
+        description: "Config owner"
+        required: true
+      url:
+        description: "Config repo URL"
+        required: true
+
+jobs:
+  add-nvim-config:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Echo inputs
+        run: |
+          echo "Owner: ${{ github.event.inputs.owner }}"
+          echo "URL: ${{ github.event.inputs.url }}"
