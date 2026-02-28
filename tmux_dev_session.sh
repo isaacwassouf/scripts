@@ -28,7 +28,7 @@ twf() {
   tmux new-window -n "opencode"
   tmux send-keys opencode C-m
 
-  tmux new-window -n "fuckaround"
+  tmux new-window -n "shell"
 
   tmux select-window -t "nvim"
 }
